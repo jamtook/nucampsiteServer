@@ -15,7 +15,7 @@ partnerRouter.route('/')
 })
 .put((req, res) => {
     res.statusCode = 403;
-    res.end(`Updating the partner: Will update the partner: ${req.body.name} with description: ${req.body.description}` ');
+    res.end(`Updating the partner: 1 Will update the partner: ${req.body.name} with description: ${req.body.description}`);
 })
 .delete((req, res) => {
     res.end('Deleting all ** partners');

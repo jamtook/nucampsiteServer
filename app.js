@@ -6,6 +6,25 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const campsiteRouter = require('./routes/campsiteRouter');
+const promotionRouter = require('./routes/promotionRouter');
+const partnerRouter = require('./routes/partnerRouter');
+
+const mongoose = require('mongoose');
+
+const url = 'mongodb://localhost:27017/nucampsite';
+const connect = mongoose.connect(url, {
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useNewUrlParser: true, 
+    useUnifiedTopology: true
+});
+
+connect.then(() => console.log('Connected correctly to server'), 
+    err => console.log(err)
+);
+
+//const { truncate } = require('fs');
 
 var app = express();
 
@@ -18,6 +37,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/campsites', campsiteRouter);
+app.use('/promotions', promotionRouter);
+app.use('/partners', partnerRouter);
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
