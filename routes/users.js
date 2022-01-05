@@ -5,8 +5,8 @@ const authenticate = require('../authenticate');
 
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
+// get users listing. 
+router.get('/', authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
   res.send('respond with a resource');
 });
 
